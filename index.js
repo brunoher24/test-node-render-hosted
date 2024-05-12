@@ -39,7 +39,8 @@ const server = http.createServer(app);
 
 server.on('error', errorHandler);
 server.on('listening', () => {
-  const address = server.address();
+  const address = process.env.ENV === 'dev' ? server.address() : '0.0.0.0';
+  console.log(address);
   const bind = typeof address === 'string' ? 'pipe ' + address : 'port ' + port;
   console.log('Listening on ' + bind);
 });
